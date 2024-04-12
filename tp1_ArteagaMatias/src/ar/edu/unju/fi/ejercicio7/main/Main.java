@@ -25,6 +25,7 @@ public class Main {
 		nuevoEmpleado.darAumento();
 		nuevoEmpleado.mostrarDatosEmpleado();
 		
+		scanner.close();
 	}
 
 }
