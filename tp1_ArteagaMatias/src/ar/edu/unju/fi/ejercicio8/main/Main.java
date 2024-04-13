@@ -14,6 +14,7 @@ public class Main {
 		CalculadoraEspecial calculadora = new CalculadoraEspecial();
 		calculadora.setN(valorDeRepeticionesDeCalculo);
 		System.out.println("El valor de la sumatoria es: "+calculadora.calcularSumatoria()+"\n"+"El valor de la productoria es: "+calculadora.calcularProductoria());
+		scanner.close();
 	}
 
 }
