@@ -32,6 +32,7 @@ public class Main {
 		for (String string : nombresPersonas) {
 			System.out.println(string);
 		}
+		scanner.close();
 	}
 
 }
