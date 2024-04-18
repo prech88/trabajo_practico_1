@@ -33,10 +33,13 @@ public class Main {
 				modificarDatosJugador(jugadores, scanner);
 				break;
 			case 5:
+				eliminarJugador(jugadores, scanner);
 				break;
 			case 6:
+				System.out.println("La cantidad de jugadores cargados es: " + jugadores.size());
 				break;
 			case 7:
+				contarJugadoresXPais(jugadores, scanner);
 				break;
 			case 8:
 				salir = true;
@@ -54,6 +57,44 @@ public class Main {
 
 	}
 	
+	private static void contarJugadoresXPais(ArrayList<Jugador> jugadores, Scanner scanner) {
+		System.out.println("Ingrese el pais de los jugadores que desea contar: ");
+		String paisBuscado = scanner.next();
+		int contador = 0;
+		for (Jugador jugador : jugadores) {
+			if (paisBuscado.equals(jugador.getNacionalidad())) {
+				contador++;
+			}
+		}
+		if (contador == 0 ) {
+			System.out.println("No se encontro jugador con el pais buscado para contarlo");
+		}else {
+			System.out.println("Existen " + contador + " jugadores que pertenecen a ese pais");
+		}
+	}
+
+	private static void eliminarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
+		System.out.println("Para eliminar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
+		String nombre = scanner.next();
+		System.out.println("Ingrese apellido: ");
+		String apellido = scanner.next();
+		boolean noEncontrado = true;
+		int indice = 0;
+		for (Jugador jugador : jugadores) {
+			if (nombre.equals(jugador.getNombre())&&apellido.equals(jugador.getApellido())) {
+				System.out.println("Jugador encontrado.");
+				jugadores.remove(indice);
+				System.out.println("Jugador eliminado exitosamente.");
+				noEncontrado = false;
+				break;
+			}
+			indice++;
+		}
+		if (noEncontrado) {
+			System.out.println("No se encontro jugador");
+		}		
+	}
+
 	private static void modificarDatosJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
 		System.out.println("Para modificar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
 		String nombre = scanner.next();
