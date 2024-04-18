@@ -3,6 +3,7 @@ package ar.edu.unju.fi.ejercicio17.main;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import ar.edu.unju.fi.ejercicio17.model.Jugador;
@@ -22,6 +23,20 @@ public class Main {
 			case 1:
 				cargarJugador(jugadores, scanner);
 				break;
+			case 2:
+				mostrarJugador(jugadores, scanner);
+				break;
+			case 3:
+				mostrarJugadoresOrdenApellido(jugadores);
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
 			case 8:
 				salir = true;
 				System.out.println("Saliendo del menu.");
@@ -38,6 +53,30 @@ public class Main {
 
 	}
 	
+	private static void mostrarJugadoresOrdenApellido(ArrayList<Jugador> jugadores) {
+		jugadores.sort(Comparator.comparing(Jugador::getApellido));
+		for (Jugador jugador : jugadores) {
+	        System.out.println(jugador);
+	    }
+	}
+
+	private static void mostrarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
+		System.out.println("Para mostrar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
+		String nombre = scanner.next();
+		System.out.println("Ingrese apellido: ");
+		String apellido = scanner.next();
+		boolean noEncontrado = true;
+		for (Jugador jugador : jugadores) {
+			if (nombre.equals(jugador.getNombre())&&apellido.equals(jugador.getApellido())) {
+				System.out.println(jugador);
+				noEncontrado = false;
+			}
+		}
+		if (noEncontrado) {
+			System.out.println("No se encontro jugador");
+		}
+	}
+
 	private static void cargarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
 		Jugador jugadorNuevo = new Jugador();
 		System.out.println("Ingresar nuevo jugador ");

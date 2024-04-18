@@ -35,6 +35,13 @@ public class Jugador {
 		return edad;
 	}
 
+	@Override
+	public String toString() {
+		return "Jugador nombre=" + nombre + ", apellido=" + apellido + ", fechaDeNacimiento=" + fechaDeNacimiento
+				+ ", nacionalidad=" + nacionalidad + ", estatura=" + estatura + ", peso=" + peso + ", posicion="
+				+ posicion + ", edad=" + calcularEdad();
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
