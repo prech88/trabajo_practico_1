@@ -21,7 +21,7 @@ public class Main {
 			opcion = verificarEntradaDeDatoInt( scanner, "Ingrese opcion de operacion: ");
 			switch (opcion) {
 			case 1:
-				cargarJugador(jugadores, scanner);
+				jugadores.add(cargarJugador(scanner));
 				break;
 			case 2:
 				mostrarJugador(jugadores, scanner);
@@ -30,6 +30,7 @@ public class Main {
 				mostrarJugadoresOrdenApellido(jugadores);
 				break;
 			case 4:
+				modificarDatosJugador(jugadores, scanner);
 				break;
 			case 5:
 				break;
@@ -53,6 +54,28 @@ public class Main {
 
 	}
 	
+	private static void modificarDatosJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
+		System.out.println("Para modificar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
+		String nombre = scanner.next();
+		System.out.println("Ingrese apellido: ");
+		String apellido = scanner.next();
+		boolean noEncontrado = true;
+		int indice = 0;
+		for (Jugador jugador : jugadores) {
+			if (nombre.equals(jugador.getNombre())&&apellido.equals(jugador.getApellido())) {
+				System.out.println("Jugador encontrado. Ingrese los nuevos datos:");
+				jugadores.set(indice, cargarJugador(scanner));
+				System.out.println("Jugador modificado exitosamente.");
+				noEncontrado = false;
+				break;
+			}
+			indice++;
+		}
+		if (noEncontrado) {
+			System.out.println("No se encontro jugador");
+		}
+	}
+
 	private static void mostrarJugadoresOrdenApellido(ArrayList<Jugador> jugadores) {
 		jugadores.sort(Comparator.comparing(Jugador::getApellido));
 		for (Jugador jugador : jugadores) {
@@ -77,7 +100,7 @@ public class Main {
 		}
 	}
 
-	private static void cargarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
+	private static Jugador cargarJugador(Scanner scanner) {
 		Jugador jugadorNuevo = new Jugador();
 		System.out.println("Ingresar nuevo jugador ");
 		System.out.println("Ingrese nombre de jugador: ");
@@ -90,7 +113,7 @@ public class Main {
 		jugadorNuevo.setEstatura(verificarEntradaDeDatoFloat(scanner, "Ingrese estatura de jugador: "));
 		jugadorNuevo.setPeso(verificarEntradaDeDatoInt(scanner, "Ingrese peso de jugador: "));
 		jugadorNuevo.setPosicion(verificarPosicionJugador(scanner, "Ingrese posicion de jugador (delantero,medio,defensa,arquero): "));
-		jugadores.add(jugadorNuevo);
+		return jugadorNuevo;
 	}
 
 	public static void mostrarMenu() {
