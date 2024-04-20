@@ -128,15 +128,15 @@ public class Main {
 				}
 				if (indicePais < paises.size()) {
 					destinos.set(indiceDestino, destinoTuristico);
+					System.out.println("Pais modificado exitosamente.");
+					noEncontrado = false;
+					break;
 				}
-				System.out.println("Pais modificado exitosamente.");
-				noEncontrado = false;
-				break;
 			}
 			indiceDestino++;
 		}
 		if (noEncontrado) {
-			System.out.println("No se encontro destino turistico con ese codigo. No se realizaron cambios.");
+			System.out.println("No se encontro destino turistico con ese codigo o ingreso un codigo de pais erroneo. No se realizaron cambios.");
 		}
 	}
 
