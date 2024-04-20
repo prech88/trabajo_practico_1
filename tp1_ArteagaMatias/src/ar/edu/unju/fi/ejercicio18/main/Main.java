@@ -127,7 +127,7 @@ public class Main {
 					indicePais++;
 				}
 				if (indicePais < paises.size()) {
-					destinos.set(indiceDestino, destinoTuristico);
+					destinos.get(indicePais).setPais(paises.get(indicePais));
 					System.out.println("Pais modificado exitosamente.");
 					noEncontrado = false;
 					break;
