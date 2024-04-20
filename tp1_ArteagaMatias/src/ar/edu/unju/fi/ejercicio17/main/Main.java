@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import ar.edu.unju.fi.ejercicio17.model.Jugador;
@@ -73,26 +74,28 @@ public class Main {
 		}
 	}
 
-	private static void eliminarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
-		System.out.println("Para eliminar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
-		String nombre = scanner.next();
-		System.out.println("Ingrese apellido: ");
-		String apellido = scanner.next();
-		boolean noEncontrado = true;
-		int indice = 0;
-		for (Jugador jugador : jugadores) {
-			if (nombre.equals(jugador.getNombre())&&apellido.equals(jugador.getApellido())) {
-				System.out.println("Jugador encontrado.");
-				jugadores.remove(indice);
-				System.out.println("Jugador eliminado exitosamente.");
-				noEncontrado = false;
-				break;
+	private static void eliminarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {		
+		if (jugadores.isEmpty()) {
+			System.out.println("La lista de jugadores esta vacia.");
+		}else {
+			System.out.println("Para eliminar un jugador ingrese los datos del jugador" + "\n" + "Nombre de jugador: ");
+			String nombre = scanner.next();
+			System.out.println("Ingrese apellido: ");
+			String apellido = scanner.next();
+			boolean noEncontrado = true;
+			Iterator<Jugador> iterator = jugadores.iterator();
+			while (iterator.hasNext()) {
+				Jugador jugador = (Jugador) iterator.next();
+				if (jugador.getNombre().equals(nombre) && jugador.getApellido().equals(apellido)) {
+					iterator.remove();
+					noEncontrado = false;
+					System.out.println("Se elimino el jugador.");
+				}
 			}
-			indice++;
+			if (noEncontrado) {
+				System.out.println("No se encontro jugador.");
+			}
 		}
-		if (noEncontrado) {
-			System.out.println("No se encontro jugador");
-		}		
 	}
 
 	private static void modificarDatosJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
@@ -119,9 +122,7 @@ public class Main {
 
 	private static void mostrarJugadoresOrdenApellido(ArrayList<Jugador> jugadores) {
 		jugadores.sort(Comparator.comparing(Jugador::getApellido));
-		for (Jugador jugador : jugadores) {
-	        System.out.println(jugador);
-	    }
+		jugadores.forEach(jug -> System.out.println(jug));
 	}
 
 	private static void mostrarJugador(ArrayList<Jugador> jugadores, Scanner scanner) {
